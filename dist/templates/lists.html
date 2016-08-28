@@ -1,1 +1,22 @@
-<h1>Hello world</h1>
+<section class="checklists container clearfix">
+  <h1 class="app-heading">Blocitoff</h1>
+  <button class="btn-sm btn-success" ng-click="open()">Create Checklist</button>
+  <div class="hr"></div>
+    <div class="column fourth">
+        <div class="lists" ng-repeat="list in allLists">
+            <h4 class="list" ng-click="setList(list)">{{ list.name }}</h4>
+        </div>
+    </div>
+</section>
+<section class="list-screen" ng-show="listName != null">
+  <h1 class="list-heading">
+    {{ listName}}
+    <button class="btn btn-success" type="button" ng-click="tasker()">New Task</button>
+  </h1>
+  <div class="hr-grey"></div>
+  <ul class="tasks" ng-repeat="task in tasks">
+    <div>
+      {{ task.title }}<small class="pull-right">{{ task.createdAt | date:'hh:mm a MMM d'}}</small>
+    </div>
+  </ul>
+</section>
