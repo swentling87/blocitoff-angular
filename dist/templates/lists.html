@@ -13,10 +13,30 @@
     {{ listName}}
     <button class="btn btn-success" type="button" ng-click="tasker()">New Task</button>
   </h1>
-  <div class="hr-grey"></div>
-  <ul class="tasks" ng-repeat="task in tasks">
-    <div>
-      {{ task.title }}<small class="pull-right">{{ task.createdAt | date:'hh:mm a MMM d'}}</small>
-    </div>
-  </ul>
+  <uib-tabset active="active">
+    <uib-tab index="0" heading="Tasks">
+      <div class="hr-grey"></div>
+      <ul class="tasks" ng-repeat="task in tasks">
+        <div ng-hide="expired(task) || completed(task)">
+          <input type="checkbox" ng-model="task.completed" ng-change="tasks.$save(task)">{{ task.title }}<small class="pull-right remaining">Time Remaining: {{ ((task.createdAt + 604800000) - currentTime) | date:'d'}} days!</small><small class="pull-right created">Date Created: {{ task.createdAt | date:'MMM d hh:mm a' }}  |  </small>
+        </div>
+      </ul>
+    </uib-tab>
+    <uib-tab index="1" heading="Completed Tasks">
+      <div class="hr-grey"></div>
+      <ul class="tasks" ng-repeat="task in tasks">
+        <div class="completed" ng-show="completed(task)">
+          {{ task.title }}
+        </div>
+      </ul>
+    </uib-tab>
+    <uib-tab index="2" heading="Expired Tasks">
+      <div class="hr-grey"></div>
+      <ul class="tasks" ng-repeat="task in tasks">
+        <div class="expired" ng-show="(expired(task) && !completed(task))">
+          {{ task.title }}
+        </div>
+      </ul>
+    </uib-tab>
+  </uib-tabset>
 </section>

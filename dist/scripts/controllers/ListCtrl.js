@@ -2,6 +2,16 @@
   function ListCtrl($scope, $uibModal, List, $cookies, Task) {
     $scope.allLists = List.all;
     $scope.activeList = null;
+    $scope.currentTime = new Date().getTime();
+
+    $scope.expired = function(task) {
+      var currentTime = new Date().getTime();
+      return ( ((task.createdAt + 604800000) - currentTime) <= 0 )
+    }
+
+    $scope.completed = function(task) {
+      return task.completed == true
+    }
 
     $scope.open = function() {
       var modalInstance = $uibModal.open({
@@ -33,7 +43,8 @@
           Task.createTask({
             listId: $scope.activeList.$id,
             createdAt: firebase.database.ServerValue.TIMESTAMP,
-            title: newTask
+            title: newTask,
+            completed: false
           });
       })
     }
