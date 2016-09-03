@@ -5,6 +5,8 @@
     <div class="form-group modal-input">
         <label for="newTaskInput">Task Title:</label>
         <input id="newTaskInput" type="text" ng-model="text">
+        <label for="newTaskInput">Priority Level:</label>
+        <select name="newTaskInput" id="newTaskInput" ng-options="option.setting for option in priority.availableOptions track by option.id" ng-model="priority.selectedOption"></select>
     </div>
 </div>
 <div class="modal-footer">

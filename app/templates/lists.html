@@ -18,7 +18,10 @@
       <div class="hr-grey"></div>
       <ul class="tasks" ng-repeat="task in tasks">
         <div ng-hide="expired(task) || completed(task)">
-          <input type="checkbox" ng-model="task.completed" ng-change="tasks.$save(task)">{{ task.title }}<small class="pull-right remaining">Time Remaining: {{ ((task.createdAt + 604800000) - currentTime) | date:'d'}} days!</small><small class="pull-right created">Date Created: {{ task.createdAt | date:'MMM d hh:mm a' }}  |  </small>
+          <span ng-show="task.priority == 'High'"class="glyphicon glyphicon-alert" aria-hidden="true" style="color: red"></span>
+          <span ng-show="task.priority == 'Medium'"class="glyphicon glyphicon-flag" aria-hidden="true" style="color: #ffd11a"></span>
+          <span ng-show="task.priority == 'Low'"class="glyphicon glyphicon-flag" aria-hidden="true" style="color: green"></span>
+          <input type="checkbox" ng-model="task.completed" ng-change="tasks.$save(task)"> {{ task.title }}<small class="pull-right remaining">Time Remaining: {{ ((task.createdAt + 604800000) - currentTime) | date:'d'}} days!</small><small class="pull-right created">Date Created: {{ task.createdAt | date:'MMM d hh:mm a' }}  |  </small>
         </div>
       </ul>
     </uib-tab>
