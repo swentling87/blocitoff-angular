@@ -25,7 +25,6 @@
       })
     }
 
-
     $scope.setList = function(list) {
       $scope.activeList = list;
       $scope.listName = list.name;
@@ -40,11 +39,14 @@
       });
 
       modalInstance.result.then(function(newTask) {
+        $scope.taskTitle = newTask.task;
+        $scope.taskPriority = newTask.priority;
           Task.createTask({
             listId: $scope.activeList.$id,
             createdAt: firebase.database.ServerValue.TIMESTAMP,
-            title: newTask,
-            completed: false
+            title: $scope.taskTitle,
+            completed: false,
+            priority: $scope.taskPriority
           });
       })
     }
