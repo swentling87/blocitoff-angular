@@ -4,9 +4,18 @@
     $scope.activeList = null;
     $scope.currentTime = new Date().getTime();
 
+    var seven_days = 604800000;
+    var one_day = 86400000;
+
+    $scope.timeLeft = function(task) {
+      var currentTime = new Date().getTime();
+      return Math.floor((((task.createdAt + seven_days) - currentTime) / one_day))
+
+    }
+
     $scope.expired = function(task) {
       var currentTime = new Date().getTime();
-      return ( ((task.createdAt + 604800000) - currentTime) <= 0 )
+      return ( ((task.createdAt + seven_days) - currentTime) <= 0 )
     }
 
     $scope.completed = function(task) {
